@@ -767,15 +767,27 @@ Casper.prototype.exit = function exit(status) {
 
 /**
  * Fetches plain text contents contained in the DOM element(s) matching a given CSS3/XPath
- * selector.
+ * selector.  Multiple matches are catenated.
  *
  * @param  String  selector  A DOM CSS3/XPath selector
  * @return String
  */
 Casper.prototype.fetchText = function fetchText(selector) {
     "use strict";
+    return this.fetchTexts(selector).join('');
+};
+
+/**
+ * Fetches plain text contents contained in the DOM element(s) matching a given CSS3/XPath
+ * selector.  Multiple matches are returned as separate array elements.
+ *
+ * @param  String  selector  A DOM CSS3/XPath selector
+ * @return Array
+ */
+Casper.prototype.fetchTexts = function fetchText(selector) {
+    "use strict";
     this.checkStarted();
-    return this.callUtils("fetchText", selector);
+    return this.callUtils("fetchTexts", selector);
 };
 
 /**

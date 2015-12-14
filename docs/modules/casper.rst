@@ -865,9 +865,22 @@ Checks if any element within remote DOM matches the provided :doc:`selector <../
 
 Retrieves text contents matching a given :doc:`selector expression <../selectors>`. If you provide one matching more than one element, their textual contents will be concatenated::
 
-    casper.start('http://google.com/search?q=foo', function() {
+    casper.start('http://casperjs.readthedocs.org/en/latest/index.html', function() {
         this.echo(this.fetchText('h3'));
-    }).run();
+    }).run();    // => 'NavigationTable Of ContentsIndexThis PageQuick searchDonateNavigation'
+
+.. _casper_fetchtexts:
+
+``fetchTexts()``
+-------------------------------------------------------------------------------
+
+**Signature:** ``fetchTexts(String selector)``
+
+Returns an array of strings matching a given :doc:`selector expression <../selectors>`::
+
+    casper.start('http://casperjs.readthedocs.org/en/latest/index.html', function() {
+        this.echo(this.fetchTexts('h3'));
+    }).run();    // => ['Navigation', 'Table Of Contents', 'Index', 'This Page', 'Quick search', 'Donate', 'Navigation']
 
 ``forward()``
 -------------------------------------------------------------------------------

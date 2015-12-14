@@ -221,19 +221,31 @@
 
         /**
          * Fetches innerText within the element(s) matching a given CSS3
-         * selector.
+         * selector.  Multiple matches are catenated.
          *
          * @param  String  selector  A CSS3 selector
          * @return String
          */
         this.fetchText = function fetchText(selector) {
-            var text = '', elements = this.findAll(selector);
+            return this.fetchTexts(selector).join('');
+        };
+
+        /**
+         * Fetches innerText within the element(s) matching a given CSS3
+         * selector.  Multiple matches are returned as separate array elements.
+         *
+         * @param  String  selector  A CSS3 selector
+         * @return Array
+         */
+        this.fetchTexts = function fetchText(selector) {
+            var elements = this.findAll(selector);
             if (elements && elements.length) {
-                Array.prototype.forEach.call(elements, function _forEach(element) {
-                    text += element.textContent || element.innerText || element.value || '';
+                return Array.prototype.map.call(elements, function _forEach(element) {
+                    return element.textContent || element.innerText || element.value || '';
                 });
+            } else {
+                return [];
             }
-            return text;
         };
 
         /**
